@@ -1,0 +1,10 @@
+python train_image_classifier.py --train_dir=skip_logs  --train_image_size=224  --model_name=mobilenet_v2  --dataset_name=imagenet --dataset_split_name=train --learning_rate=0.045 --preprocessing_name="inception_v2" --label_smoothing=0.1 --moving_average_decay=0.9999 --batch_size=96 --learning_rate_decay_factor=0.98 --num_epochs_per_decay=2.5 --checkpoint_path=./pretrained_model/mobilenet_v2_1.0_224.ckpt --checkpoint_exclude_scopes=MobilenetV2/skip --num_clones=1 --dataset_dir=/home/hryou/lpirc/imagenet-data/ImageNet-Tensorflow/train_tfrecord --cr=0.8
+
+
+python -u eval_image_classifier.py --dataset_dir=/home/hryou/lpirc/imagenet-data/ImageNet-Tensorflow/validation_tfrecord --dataset_name=imagenet --dataset_split_name=validation --model_name=mobilenet_v2 --checkpoint_path=skip_logs/
+
+
+python train_image_classifier.py --train_dir=skip_logs  --train_image_size=224  --model_name=mobilenet_v2  --dataset_name=imagenet --dataset_split_name=train --learning_rate=0.01 --preprocessing_name=\"inception_v2\" --label_smoothing=0.1 --moving_average_decay=0.9999 --batch_size=96 --learning_rate_decay_factor=0.95 --num_epochs_per_decay=2.5 --checkpoint_path=./pretrained_model/mobilenet_v2_1.0_224.ckpt --checkpoint_exclude_scopes=MobilenetV2/skip --dataset_dir=/userhome/ImageNet-Tensorflow/train_tfrecord --num_clones=1 --cr=0.8 
+
+
+python -u eval_image_classifier.py --dataset_dir=/userhome/ImageNet-Tensorflow/validation_tfrecord --dataset_name=imagenet --dataset_split_name=validation --model_name=mobilenet_v2 --checkpoint_path=skip_logs/model.ckpt-31634 >test_log.txt 2>&1
